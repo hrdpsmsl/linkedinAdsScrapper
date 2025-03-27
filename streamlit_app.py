@@ -15,7 +15,7 @@ def setup_driver():
     chrome_options.add_argument("--headless")
     chrome_options.add_argument("--disable-gpu")
     #service = Service(ChromeDriverManager().install())
-    driver = webdriver.Chrome(service=Service(ChromeDriverManager(chrome_type=ChromeType.CHROMIUM).install()),options=options)
+    driver = webdriver.Chrome(service=Service(ChromeDriverManager(chrome_type=ChromeType.CHROMIUM).install()),options=chrome_options)
     return driver
 
 # Function to scrape ad data
