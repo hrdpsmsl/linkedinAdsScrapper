@@ -10,13 +10,22 @@ import time
 import re
 
 # Function to set up Selenium WebDriver
-def setup_driver():
+def setup_driverss():
     chrome_options = Options()
     chrome_options.add_argument("--headless")
     chrome_options.add_argument("--disable-gpu")
     #service = Service(ChromeDriverManager().install())
     driver = webdriver.Chrome(service=Service(ChromeDriverManager(chrome_type=ChromeType.CHROMIUM).install()),options=chrome_options)
     return driver
+
+@st.cache_resource
+def setup_driver():
+    return webdriver.Chrome(service=Service(ChromeDriverManager(chrome_type=ChromeType.CHROMIUM).install()),options=options)
+options = Options()
+options.add_argument("--disable-gpu")
+options.add_argument("--headless")
+driver = get_driver()
+
 
 # Function to scrape ad data
 def scrape_ad_data(driver, url):
