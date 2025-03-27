@@ -1,13 +1,11 @@
 import streamlit as st
 from selenium import webdriver
-from selenium.webdriver.chrome.service import Service
-from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.common.by import By
-from webdriver_manager.chrome import ChromeDriverManager
-from webdriver_manager.core.os_manager import ChromeType
 import pandas as pd
 import time
 import re
+from webdriver_manager.chrome import ChromeDriverManager
+from selenium.webdriver.chrome.service import Service as ChromeService
 
 # Function to set up Selenium WebDriver
 def setup_driverss():
@@ -20,11 +18,11 @@ def setup_driverss():
 
 @st.cache_resource
 def setup_driver():
-    return webdriver.Chrome(service=Service(ChromeDriverManager(chrome_type=ChromeType.CHROMIUM).install()),options=options)
-options = Options()
-options.add_argument("--disable-gpu")
-options.add_argument("--headless")
-
+    chrome_options = webdriver.ChromeOptions()
+    chrome_options.add_argument('--headless')
+    chrome_options.add_argument('--window-size=1920x1080')
+    chrome_options.add_argument('--disable-gpu')
+    return webdriver.Chrome(service=ChromeService(ChromeDriverManager().install()), options=chrome_options)
 
 # Function to scrape ad data
 def scrape_ad_data(driver, url):
