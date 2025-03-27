@@ -12,7 +12,7 @@ def setup_driverss():
     chrome_options = Options()
     chrome_options.add_argument("--headless")
     chrome_options.add_argument("--disable-gpu")
-    chrome_options.add_argument("--disable-blink-features=AutomationControlled")  # Reduce bot detection
+    
     #service = Service(ChromeDriverManager().install())
     driver = webdriver.Chrome(service=Service(ChromeDriverManager(chrome_type=ChromeType.CHROMIUM).install()),options=chrome_options)
     return driver
